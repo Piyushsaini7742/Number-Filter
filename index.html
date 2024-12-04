@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number Check</title>
+    <style>
+        .box,
+        .box2 {
+            display: flex;
+            flex-wrap: wrap;
+            font-family: cursive;
+            font-size: 20px;
+            margin: 10px;
+            border: solid green 5px;
+            color: red;
+            font-weight: bold;
+        }
+        
+
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            font-weight: bold;
+        }
+
+        span {
+            margin: 10px;
+        }
+        button {
+            background-color: rgb(8, 100, 100);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #p1{
+            background-color: green;
+        }
+        #p2{
+            background-color: red;
+        }
+        #p3{
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number Filter</h1>
+    <h3>Array Of Number From 1-100</h3>
+    <div class="box"></div>
+    <h3>Filtered Array</h3>
+    <div class="box2"></div>
+    <button class="" onclick="">Get Prime Numbers</button>
+    <button id="p1" class="" onclick="">Get Even Numbers</button>
+    <button id="p2" class="" onclick="">Get Composite Numbers</button>
+    <button id="p3" class="" onclick="">Get Odd Numbers</button>
+
+    <script>
+        let box = document.querySelector(".box");
+        let box2 = document.querySelector(".box2");
+        let numbers = [];
+        for (let index = 1; index <= 100; index++) {
+            box.innerHTML += `<span>${index}</span>`;
+            numbers.push(index);
+        }
+        document.querySelectorAll("button").forEach((button) => {
+            button.addEventListener("click", (e) => {
+                box2.innerHTML = "";
+                let filteredNumbers = [];
+                switch (e.target.textContent) {
+                    case "Get Prime Numbers":
+                        filteredNumbers = getPrimeNumbers(numbers);
+                        break;
+                    case "Get Even Numbers":
+                        filteredNumbers = getEvenNumbers(numbers);
+                        break;
+                    case "Get Composite Numbers":
+                        filteredNumbers = getCompositeNumbers(numbers);
+                        break;
+                    case "Get Odd Numbers":
+                        filteredNumbers = getOddNumbers(numbers);
+                        break;
+                }
+                filteredNumbers.forEach((num) => {
+                    box2.innerHTML += `<span>${num}</span>`;
+                });
+            });
+        });
+        function getPrimeNumbers(arr) {
+            return arr.filter((num) => {
+                if (num <= 1) return false;
+                for (let i = 2; i * i <= num; i++) {
+                    if (num % i === 0) return false;
+                }
+                return true;
+            });
+        }
+        function getEvenNumbers(arr) {
+            return arr.filter((num) => num % 2 === 0);
+        }
+        function getCompositeNumbers(arr) {
+            return arr.filter((num) => {
+                if (num <= 1) return false;
+                for (let i = 2; i * i <= num; i++) {
+                    if (num % i === 0) return true;
+                }
+                return false;
+            });
+        }
+        function getOddNumbers(arr) {
+            return arr.filter((num) => num % 2 !== 0);
+        }
+    </script>
+</body>
+
+</html>
